@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import HomePageNav from "./HomePageNav";
+import LoginPopup from "./LoginPopup";
 import { Link, Outlet } from "react-router-dom";
-// import styles from "./Styles/HomePageStyles.js";
-// import { makeStyles } from "@mui/material";
 function HomePage() {
+  // _________ Varibales ___________________________________
   const mainPadding = "3rem";
   const numberOfCoulmns = 9;
   const makeNumOfArrays = [...Array(numberOfCoulmns).keys()];
+  const [data, setData] = useState({ popup: true });
+  // _________ End Of Varibales ____________________________
+
+  // _________  Functions  ____________________________
+  // _________ End Of Functions  ____________________________
+
   return (
     <section
       className="home-page"
@@ -15,8 +21,8 @@ function HomePage() {
         backgroundColor: "lightBlue",
       }}
     >
-      <Outlet />
-      <HomePageNav />
+      <LoginPopup visible={data.popup} setData={setData} />
+      <HomePageNav balance={data.salary} user={data.name} />
       <main
         className="main"
         style={{

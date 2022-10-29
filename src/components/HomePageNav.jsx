@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function HomePageNav(props) {
+function HomePageNav({ balance, user }) {
   const style = {
     backgroundColor: "whitesmoke",
     height: "10%",
@@ -9,14 +9,17 @@ function HomePageNav(props) {
     alignItems: "center",
     justifyContent: "space-between",
     padding: "3rem",
+    textTransform: "capitalize",
   };
   return (
-    <nav style={style}>
-      <Link className="balance_link" style={{ textTransform: "capitalize" }}>
-        your balance is : <span style={{ color: "green" }}>5000</span>
-      </Link>
-      <h4>State House Mangement</h4>
-    </nav>
+    balance && (
+      <nav style={style}>
+        <Link className="balance_link" style={{ textTransform: "capitalize" }}>
+          your balance is : <span style={{ color: "green" }}>{balance}</span>
+        </Link>
+        <h4>{user}</h4>
+      </nav>
+    )
   );
 }
 
