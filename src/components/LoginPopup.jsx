@@ -8,7 +8,6 @@ function LoginPopup({ visible, setData }) {
   // ________ Functions ________________________
   const handleClick = (e) => {
     e.preventDefault();
-    console.log(Number(salary) ? "okay" : "not okay");
     // ___________________________________________________
     if (name === "" || salary === "") return null;
     // ___________________________________________________

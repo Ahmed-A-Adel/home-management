@@ -4,9 +4,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
 const router = createBrowserRouter([
   {
-    element: <App />,
     path: "/",
-    errorElement: <h1>oppos! it's okay just go back</h1>,
+    element: <App />,
+    // errorElement: <h1>oppos! it's okay just go back</h1>,
   },
 ]);
 const root = ReactDOM.createRoot(document.getElementById("root"));
