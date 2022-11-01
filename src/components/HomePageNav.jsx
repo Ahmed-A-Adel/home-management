@@ -12,7 +12,7 @@ function HomePageNav({ balance, user }) {
     textTransform: "capitalize",
   };
   return (
-    balance && (
+    user && (
       <nav style={style}>
         <Link className="balance_link" style={{ textTransform: "capitalize" }}>
           your balance is : <span style={{ color: "green" }}>{balance}</span>

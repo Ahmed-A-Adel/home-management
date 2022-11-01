@@ -14,9 +14,11 @@ function HomePage() {
   // _________  Functions  _____________________________________________
   const handleSubmit = (e, formInputs) => {
     e.preventDefault();
-    const { setMoney, setTitle, title, money } = formInputs;
+    const { setMoney, setTitle, title, money, setData, data } = formInputs;
     // ---------------------------------------------------
     if (title === "" || money === "") return null;
+    // ---------------------------------------------------
+    if (money > data.salary) return null;
     // ---------------------------------------------------
     if (!Number(money)) return null;
     // ---------------------------------------------------
@@ -25,12 +27,12 @@ function HomePage() {
     // ---------------------------------------------------
     setState([...state, { title, money }]);
     setAddPlane(true);
+    setData({ ...data, salary: data.salary - money });
     // ---------------------------------------------------
   };
   // __________________________________________________________
   const toggleAddPalne = () => setAddPlane(!addPlane);
-
-  // _________ End Of Functions  _________________________________________
+  // _________ End Of Functions  _______________________________________
 
   return (
     <section
@@ -58,6 +60,7 @@ function HomePage() {
           handleSubmit={handleSubmit}
           toggleAddPalne={toggleAddPalne}
           addPlane={addPlane}
+          data={{ data, setData }}
         />
       </main>
     </section>

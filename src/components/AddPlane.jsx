@@ -1,10 +1,24 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-function AddPlane({ addPlane, state, handleSubmit, toggleAddPalne }) {
+function AddPlane({ addPlane, state, handleSubmit, toggleAddPalne, data }) {
+  //   ___________ VAribales __________________________________________
   const [title, setTitle] = useState("");
   const [money, setMoney] = useState("");
+  //   ___________ End Of VAribales ___________________________________
+  //   ___________ Functions __________________________________________
   const handleClick = (e) =>
-    handleSubmit(e, { title, setTitle, money, setMoney });
+    handleSubmit(e, {
+      title,
+      setTitle,
+      money,
+      setMoney,
+      data,
+      data: data.data,
+      setData: data.setData,
+    });
+  // ____________________________________________________________
+
+  //   ___________ End Of Functions ___________________________________
   return (
     <>
       {" "}
