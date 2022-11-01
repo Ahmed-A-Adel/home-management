@@ -31,7 +31,7 @@ function HomePage() {
     // ---------------------------------------------------
   };
   // __________________________________________________________
-  const toggleAddPalne = () => setAddPlane(!addPlane);
+  const toggleAddPalne = () => data.salary && setAddPlane(!addPlane);
   // _________ End Of Functions  _______________________________________
 
   return (
