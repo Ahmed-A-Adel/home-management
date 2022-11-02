@@ -1,24 +1,24 @@
 import React, { useState } from "react";
 import "./Styles/LoginPopup.css";
-function LoginPopup({ visible, setData }) {
+function LoginPopup({ data, setData }) {
   // ________ Varibales ________________________
-  const [salary, setsalary] = useState("");
+  const [balance, setbalance] = useState("");
   const [name, setname] = useState("");
   // ________ Varibales ________________________
   // ________ Functions ________________________
   const handleClick = (e) => {
     e.preventDefault();
     // ___________________________________________________
-    if (name === "" || salary === "") return null;
+    if (name === "" || balance === "") return null;
     // ___________________________________________________
-    if (!Number(salary) || salary.length < 3) return null;
+    if (!Number(balance) || balance.length < 3) return null;
     // ___________________________________________________
-    setData({ name, salary, popup: false });
+    setData({ ...data, user: { name, balance, login: false } });
   };
   // ________ Functions ________________________
 
   return (
-    visible && (
+    data.user.login && (
       <div className="login-popup">
         <form className="login-popup_form" onSubmit={handleClick}>
           <div className="login-popup_form_container">
@@ -32,13 +32,13 @@ function LoginPopup({ visible, setData }) {
             />
           </div>
           <div className="login-popup_form_container">
-            <label htmlFor="salary">salary</label>
+            <label htmlFor="balance">balance</label>
             <input
               type="text"
-              name="salary"
-              id="salary"
-              value={salary}
-              onChange={(e) => setsalary(e.target.value)}
+              name="balance"
+              id="balance"
+              value={balance}
+              onChange={(e) => setbalance(e.target.value)}
             />
           </div>
           <button type="submit" onClick={handleClick}>

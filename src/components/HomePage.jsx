@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import HomePageNav from "./HomePageNav";
 import LoginPopup from "./LoginPopup";
 import AddPlane from "./AddPlane";
-import { Link, Outlet } from "react-router-dom";
 function HomePage() {
   // _________ Varibales ___________________________________
   const mainPadding = "3rem";
-  const [data, setData] = useState({ popup: true });
-  const [state, setState] = useState([]);
+  const [data, setData] = useState({
+    planes: [{ title: "food", money: "300" }],
+    user: { name: "", balance: "", login: true },
+  });
   const [addPlane, setAddPlane] = useState(true);
   // _________ End Of Varibales ____________________________
 
@@ -25,13 +26,16 @@ function HomePage() {
     setMoney("");
     setTitle("");
     // ---------------------------------------------------
-    setState([...state, { title, money }]);
+    // setState([...state, { title, money }]);
     setAddPlane(true);
-    setData({ ...data, salary: data.salary - money });
+    setData({
+      planes: [...data.planes, { title, money }],
+      user: { ...data.user, balance: data.user.balance - money },
+    });
     // ---------------------------------------------------
   };
   // __________________________________________________________
-  const toggleAddPalne = () => data.salary && setAddPlane(!addPlane);
+  const toggleAddPalne = () => data.user.balance && setAddPlane(!addPlane);
   // _________ End Of Functions  _______________________________________
 
   return (
@@ -41,8 +45,8 @@ function HomePage() {
         minHeight: "100vh",
       }}
     >
-      <LoginPopup visible={data.popup} setData={setData} />
-      <HomePageNav balance={data.salary} user={data.name} />
+      <LoginPopup data={data} setData={setData} />
+      <HomePageNav user={data.user} />
       <main
         className="main"
         style={{
@@ -56,11 +60,11 @@ function HomePage() {
         }}
       >
         <AddPlane
-          state={state}
           handleSubmit={handleSubmit}
           toggleAddPalne={toggleAddPalne}
           addPlane={addPlane}
-          data={{ data, setData }}
+          data={data}
+          setData={setData}
         />
       </main>
     </section>

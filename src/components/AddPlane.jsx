@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-function AddPlane({ addPlane, state, handleSubmit, toggleAddPalne, data }) {
+function AddPlane({ addPlane, handleSubmit, toggleAddPalne, data, setData }) {
   //   ___________ VAribales __________________________________________
   const [title, setTitle] = useState("");
   const [money, setMoney] = useState("");
@@ -13,16 +13,14 @@ function AddPlane({ addPlane, state, handleSubmit, toggleAddPalne, data }) {
       money,
       setMoney,
       data,
-      data: data.data,
-      setData: data.setData,
+      setData,
     });
   // ____________________________________________________________
-
   //   ___________ End Of Functions ___________________________________
   return (
     <>
       {" "}
-      {data.data.salary >= 1 ? (
+      {data.user.balance >= 1 ? (
         <article
           className="add-plane"
           style={{
@@ -81,8 +79,8 @@ function AddPlane({ addPlane, state, handleSubmit, toggleAddPalne, data }) {
       ) : (
         ""
       )}
-      {state &&
-        state.map((plane, i) => (
+      {data.planes &&
+        data.planes.map((plane, i) => (
           <article
             className="add-plane"
             key={plane.title + i}
