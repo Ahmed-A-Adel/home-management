@@ -7,7 +7,7 @@ function HomePage() {
   // _________ Varibales ___________________________________
   const mainPadding = "3rem";
   const [data, setData] = useState({ popup: true });
-  const [state, setState] = useState([{ title: "title", money: "300" }]);
+  const [state, setState] = useState([]);
   const [addPlane, setAddPlane] = useState(true);
   // _________ End Of Varibales ____________________________
 

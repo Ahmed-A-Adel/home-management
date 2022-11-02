@@ -22,61 +22,65 @@ function AddPlane({ addPlane, state, handleSubmit, toggleAddPalne, data }) {
   return (
     <>
       {" "}
-      <article
-        className="add-plane"
-        style={{
-          background: "green",
-          height: "15rem",
-
-          minHeight: "50%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-evenly",
-          alignItems: "center",
-        }}
-      >
-        <Link
-          onClick={toggleAddPalne}
-          className="add-plane_balance"
+      {data.data.salary >= 1 ? (
+        <article
+          className="add-plane"
           style={{
-            fontSize: addPlane ? "6rem" : "1rem",
-            color: "white",
-            backgroundColor: "transparent",
-            textDecoration: "none",
+            background: "green",
+            height: "15rem",
+
+            minHeight: "50%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-evenly",
+            alignItems: "center",
           }}
         >
-          {addPlane ? "+" : "go Back"}
-        </Link>
+          <Link
+            onClick={toggleAddPalne}
+            className="add-plane_balance"
+            style={{
+              fontSize: addPlane ? "6rem" : "1rem",
+              color: "white",
+              backgroundColor: "transparent",
+              textDecoration: "none",
+            }}
+          >
+            {addPlane ? "+" : "go Back"}
+          </Link>
 
-        {!addPlane && (
-          <form onSubmit={handleClick}>
-            <div className="login-popup_form_container">
-              <label htmlFor={"title"}>{"title"}</label>
-              <input
-                type="text"
-                name={"title"}
-                id={"title"}
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-            </div>
-            <div className="login-popup_form_container">
-              <label htmlFor={"money"}>{"money"}</label>
-              <input
-                type="text"
-                name={"money"}
-                id={"money"}
-                value={money}
-                onChange={(e) => setMoney(e.target.value)}
-              />
-            </div>
+          {!addPlane && (
+            <form onSubmit={handleClick}>
+              <div className="login-popup_form_container">
+                <label htmlFor={"title"}>{"title"}</label>
+                <input
+                  type="text"
+                  name={"title"}
+                  id={"title"}
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+              </div>
+              <div className="login-popup_form_container">
+                <label htmlFor={"money"}>{"money"}</label>
+                <input
+                  type="text"
+                  name={"money"}
+                  id={"money"}
+                  value={money}
+                  onChange={(e) => setMoney(e.target.value)}
+                />
+              </div>
 
-            <button type="submit" onClick={handleClick}>
-              add one
-            </button>
-          </form>
-        )}
-      </article>
+              <button type="submit" onClick={handleClick}>
+                add one
+              </button>
+            </form>
+          )}
+        </article>
+      ) : (
+        ""
+      )}
       {state &&
         state.map((plane, i) => (
           <article
