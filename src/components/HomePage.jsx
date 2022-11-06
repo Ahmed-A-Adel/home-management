@@ -1,22 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import HomePageNav from "./HomePageNav";
-import { Link, Outlet } from "react-router-dom";
-// import styles from "./Styles/HomePageStyles.js";
-// import { makeStyles } from "@mui/material";
+import LoginPopup from "./LoginPopup";
+import AddPlane from "./AddPlane";
 function HomePage() {
+  // _________ Varibales ___________________________________
   const mainPadding = "3rem";
-  const numberOfCoulmns = 9;
-  const makeNumOfArrays = [...Array(numberOfCoulmns).keys()];
+  const [data, setData] = useState({
+    planes: [{ title: "food", money: "300" }],
+    user: { name: "", balance: "", login: true },
+  });
+  const [addPlane, setAddPlane] = useState(true);
+  // _________ End Of Varibales ____________________________
+
+  // _________  Functions  _____________________________________________
+  const handleSubmit = (e, formInputs) => {
+    e.preventDefault();
+    const { setMoney, setTitle, title, money, setData, data } = formInputs;
+    // ---------------------------------------------------
+    if (title === "" || money === "") return null;
+    // ---------------------------------------------------
+    if (money > data.salary) return null;
+    // ---------------------------------------------------
+    if (!Number(money)) return null;
+    // ---------------------------------------------------
+    setMoney("");
+    setTitle("");
+    // ---------------------------------------------------
+    // setState([...state, { title, money }]);
+    setAddPlane(true);
+    setData({
+      planes: [...data.planes, { title, money }],
+      user: { ...data.user, balance: data.user.balance - money },
+    });
+    // ---------------------------------------------------
+  };
+  // __________________________________________________________
+  const toggleAddPalne = () => data.user.balance && setAddPlane(!addPlane);
+  // _________ End Of Functions  _______________________________________
+
   return (
     <section
       className="home-page"
       style={{
         minHeight: "100vh",
-        backgroundColor: "lightBlue",
       }}
     >
-      <Outlet />
-      <HomePageNav />
+      <LoginPopup data={data} setData={setData} />
+      <HomePageNav user={data.user} />
       <main
         className="main"
         style={{
@@ -29,32 +59,13 @@ function HomePage() {
           alignItems: "flex-start",
         }}
       >
-        {makeNumOfArrays.map((_, index) => (
-          <article
-            key={index}
-            className="add-plane"
-            style={{
-              background: "black",
-              height: "15rem",
-
-              minHeight: "50%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Link
-              className="add-plane_balance"
-              style={{
-                fontSize: "6rem",
-                color: "white",
-                backgroundColor: "transparent",
-              }}
-            >
-              +
-            </Link>
-          </article>
-        ))}
+        <AddPlane
+          handleSubmit={handleSubmit}
+          toggleAddPalne={toggleAddPalne}
+          addPlane={addPlane}
+          data={data}
+          setData={setData}
+        />
       </main>
     </section>
   );
